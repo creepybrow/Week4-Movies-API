@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Movies API</title>
+</head>
+
+<body>
+  <h1>Movies</h1>
+  <p class="movie__search-para">Search a movie below</p>
+
+  <div class="theater">
+    <div class="stars"></div>
+
+    <div class="tv-screen">
+      <div class="screen">
+        <div class="movie-list">
+          <button class="scroll-button" id="prev">&#9664;</button>
+          <div class="movies">
+            <!-- Movies will be dynamically inserted here -->
+          </div>
+          <button class="scroll-button" id="next">&#9654;</button>
+        </div>
+        <div id="loading-indicator" class="hidden">
+          <img src="./assets/786.gif" alt="Loading">
+        </div>
+        <div id="search-container">
+          <input type="text" id="search-input" placeholder="Enter movie title">
+          <button id="search-button" class="remote-btn">🔍</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
