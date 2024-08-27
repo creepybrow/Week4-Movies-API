@@ -157,6 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateScrollArrowsVisibility();
   });
+  // Event Listener for the Enter key press in the search input
+  searchInput.addEventListener('keydown', (event)=>{
+    if(event.key === 'Enter'){
+      event.preventDefault();//Prevent the default action
+      searchButton.click();//Trigger the click event on the search button
+    }
+  })
 
   modalCloseButton.addEventListener('click', closeModal);
 });
