@@ -61,79 +61,94 @@ body {
   font-size: 24px;
   z-index: 2;
   border-radius: 12px;
+  opacity:0.8;
 }
 
 .movie-list {
-  margin-bottom:2%;
-  display: flex;
+  position:absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10%);
   justify-content: center;
   position: absolute;
-  display: flex;
   align-items: center;
-  bottom: 15%;
-  left: 5%;
-  transform: translateY(30%);
-  width: 90%;
-  height: 100%;
-  padding: 0 20px;
+  width: 300px;/*match the width of the movie*/
+  height: 500px;
   background-color: rgba(4, 3, 3, 0.7);
-  z-index: 3;
   overflow:hidden;
+  scroll-behavior:smooth;
+  scroll-snap-type: x mandatory;/*Enable scroll snapping */
+  color:white;
+}
+.movies{
+  display: flex;
+  scroll-snap-type:x mandatory;
+  overflow-x: hidden;
+  scroll-behavior:smooth;
+  transition:transform 0.3s ease;/* smooth transition for scroll*/
+  height:100%;
+  width:100%;/*take full width of .movie-list */
 }
 
-.movies{
-  display: flex;
-  overflow-x: hidden;
-  overflow-y:hidden;
-  margin: 0 24px;
-  padding:0 30px;
-  width:100%;
-}
-.movies{
-  display: flex;
-  align-items: center;
-  gap:20px;
-  flex-wrap: nowrap;
-  width:100%;
-}
 .movie img{
-  width:400px;
-  height:90%;
+  flex:0 0 100%;/*take full width of .movie-list*/
+  width:100%;
+  height:auto;
   object-fit:cover;
   border-radius:24px;
 }
 
 .movie {
-  display: flex;
+  flex:0 0 auto;
+  width:300px;
+  height:auto;
+  margin:0;
   text-align: center;
-  flex-direction: column;
   align-items: center;
-  gap:10px;
-  flex-wrap: nowrap;
-  width:100%;
-  height: 100%;
+  height:auto;
   background-color: #0e0e0e;
-  border-radius: 50%;
-  color: #f6f1f1;
   border-radius: 24px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow:hidden;
+  scroll-snap-align:start;
 }
 
 .scroll-button {
-  background-color: #131212;
-  color: #d2450d;
+  background-color: transparent;
+  color: #d20d0d72;
   border: none;
-  width: 100px;
-  height: 400px;
+  width: -80%;
+  height: 10px;
+  border-radius: 50%;
   font-size: 50px;
   cursor: pointer;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:absolute;
+  top:30%;
+  z-index: 4;
+  opacity:0.8;
+}
+#prev{
+  left:0;/*position on the left*/
+  color:rgba(134, 7, 113, 0.913);
+  width:50%;
+  height:50%;
+}
+#next{
+  right:0;/*positoin on the right*/
+  color:rgb(122, 7, 110);
+  width:50%;
+  height:50%;
 }
 
 .scroll-button:active {
-  transform: translateX(10px);
+  transform: translateX(5px);
 }
 
 h1 {
