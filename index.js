@@ -8,14 +8,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingindicator = document.getElementById('loading-indicator');
   const errorMessage = document.createElement('div'); //Create error message
   const starsContainer = document.querySelector('.stars');
+  
   errorMessage.id = 'error-message';
   errorMessage.style.color = 'red';
   errorMessage.style.textAlign = 'center';
-
-  
-
-
   document.body.insertBefore(errorMessage,document.querySelector('.theater'));//Insert error message in the body
+  
+  function getMovieWidth(){
+    const movieElements = document.querySelectorAll('.movie');
+    if(movieElements.length > 0){
+      return movieElements[0].offsetWidth;//width of one movie
+    }
+    return 0;
+  }
+  function scrollMoviesLeft(){
+   const movieWidth = getMovieWidth();
+   const currentTransform = getComputedStyle(movieList).transform;
+   const currentOffset = currentTransform !== 'none' ? parseFloat(currentTransform.split(',')[4]) : 0;
+   movieList.style.transform = `translateX(${Math.min(currentOffset + movieWidth, 0)}px)`;
+  }
+  function scrollMoviesRight(){
+  const movieWidth = getMovieWidth();
+   const currentTransform = getComputedStyle(movieList).transform;
+   const currentOffset = currentTransform !== 'none' ? parseFloat(currentTransform.split(',')[4]) : 0;
+   movieList.style.transform = `translateX(${Math.max(currentOffset - movieWidth,maxScroll)}px)`;
+  }
+   
+  //Event listeners for scroll buttons
+  
+  prevButton.addEventListener('click', scrollMoviesLeft);
+  nextButton.addEventListener('click', scrollMoviesRight);
 
 
   let hasSearched = false; // Flag to track if a search has been made
@@ -91,7 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeModal() {
     modal.classList.add('hidden'); // Hide the modal
   }
+ // Event listeners for scroll buttons
 
+ prevButton.addEventListener('click', () => scrollMoviesLeft('prev'));
+ nextButton.addEventListener('click', () => scrollMoviesRight('next'));
+
+ //Handle keyboard navigation
+ document.addEventListener('keydown', (event)=>{
+   if(event.key === 'ArrowLeft'){
+     scrollMoviesLeft();
+   }
+   else if(event.key === 'ArrowRight'){
+     scrollMoviesLeft();
+   }
+ });
   // Function to display movies in the TV screen
   function displayMovies(movies) {
     movieList.innerHTML = ''; // Clear previous movies
@@ -117,9 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     movieList.scrollBy({ left: 200, behavior: 'smooth' });
   }
 
-  // Event listeners for scroll buttons
-  prevButton.addEventListener('click', scrollMoviesLeft);
-  nextButton.addEventListener('click', scrollMoviesRight);
+ 
 
   function updateScrollArrowsVisibility() {
     const hasMovies = movieList.children.length > 0;
